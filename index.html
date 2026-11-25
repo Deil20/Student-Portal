@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northfield University Student Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2F5F3;--card:#fff;--ink:#17262B;--muted:#5C6E73;--line:#D9E1DE;--teal:#0E6F68;--teal-soft:#DDEFEC;--amber:#E7A23A;--plum:#8B3A5C;--r:14px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Figtree,system-ui,sans-serif;background:var(--paper);color:var(--ink);display:grid;grid-template-columns:240px 1fr;min-height:100vh;line-height:1.5}
+h1,h2,h3{font-family:'Bricolage Grotesque',Georgia,serif;line-height:1.15}
+h1{font-size:2.3rem;margin-bottom:.3rem}
+h2{font-size:1.2rem;margin-bottom:.8rem}
+.side{background:var(--ink);color:#E8F0EE;padding:1.5rem 1rem;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{font-family:'Bricolage Grotesque',serif;font-weight:700;font-size:1.5rem;padding:0 .6rem 1.5rem}
+.brand small{display:block;font:500 .85rem Figtree,sans-serif;color:#9DB5B1}
+nav{display:flex;flex-direction:column;gap:.2rem}
+nav a{color:#C5D6D3;text-decoration:none;padding:.65rem .8rem;border-radius:10px;font-weight:500}
+nav a:hover{background:#243A40}
+nav a.on{background:var(--teal);color:#fff}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.who{margin-top:auto;display:flex;align-items:center;gap:.7rem;padding:.6rem;font-weight:500}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--amber);color:var(--ink);display:grid;place-items:center;font-weight:700;flex:none}
+main{padding:2.2rem clamp(1rem,4vw,3rem);max-width:1100px;width:100%;outline:none}
+.sub{color:var(--muted);margin-bottom:1.6rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-bottom:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1.2rem}
+.stat b{font:700 2.4rem 'Bricolage Grotesque',serif;display:block}
+.stat span{color:var(--muted)}
+.row{display:flex;gap:.9rem;padding:.7rem 0;border-top:1px solid var(--line);align-items:flex-start}
+.row:first-of-type{border-top:0}
+.time{min-width:92px;font-weight:600;color:var(--teal)}
+.muted{color:var(--muted);font-size:.9rem}
+.tag{display:inline-block;font-size:.78rem;font-weight:600;padding:.12rem .55rem;border-radius:99px;background:var(--teal-soft);color:var(--teal)}
+.tag.urgent{background:#F4DCE6;color:var(--plum)}
+.tag.event{background:#FBEBCB;color:#7A5210}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.tabs button{font:600 .95rem Figtree,sans-serif;border:1px solid var(--line);background:var(--card);padding:.5rem 1rem;border-radius:99px;cursor:pointer;color:var(--ink)}
+.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.slot{border-left:5px solid var(--teal);background:var(--card);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.7rem;display:grid;grid-template-columns:130px 1fr;gap:1rem;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.slot:nth-child(even){border-left-color:var(--amber)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{text-align:left;padding:.75rem .6rem;border-bottom:1px solid var(--line)}
+th{font-size:.9rem;color:var(--muted);font-weight:600}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;min-width:110px}
+.bar i{display:block;height:100%;background:var(--teal)}
+.bar i.low{background:var(--amber)}
+.ann{margin-bottom:.8rem}
+.ann h3{font-size:1.1rem;margin:.4rem 0 .2rem}
+dl{display:grid;grid-template-columns:150px 1fr;gap:.6rem 1rem}
+dt{color:var(--muted)}
+dd{font-weight:500}
+.hero{display:flex;gap:1.2rem;align-items:center;margin-bottom:1.2rem}
+.hero .avatar{width:84px;height:84px;font-size:2rem}
+@media(max-width:760px){
+ body{grid-template-columns:1fr}
+ .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:.8rem}
+ .brand{padding:0 1rem 0 .4rem;font-size:1.2rem}.brand small,.who{display:none}
+ nav{flex-direction:row;flex-wrap:wrap}
+ .slot{grid-template-columns:1fr;gap:.2rem}
+ dl{grid-template-columns:1fr;gap:0}dd{margin-bottom:.6rem}
+ h1{font-size:1.8rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="brand">Northfield<small>Student Portal</small></div>
+  <nav id="nav">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#schedule">Class schedule</a>
+    <a href="#grades">Grades</a>
+    <a href="#announcements">Announcements</a>
+    <a href="#profile">Profile</a>
+  </nav>
+  <div class="who"><span class="avatar" id="miniAvatar"></span><span id="miniName"></span></div>
+</aside>
+<main id="view" tabindex="-1"></main>
+
+<script>
+const student={name:"Maria Santos",id:"2024-00123",program:"BS Information Technology",year:"3rd Year",section:"IT-3A",email:"maria.santos@student.example.edu",phone:"+63 900 000 0000",adviser:"Dr. Elena Reyes",address:"12 Mabini Street, Sample City",status:"Regular, good standing"};
+const D=["Mon","Tue","Wed","Thu","Fri"];
+const courses=[
+{code:"IT301",name:"Web Systems and Technologies",prof:"Prof. Daniel Cruz",room:"Lab 2",days:["Mon","Wed"],s:"08:00",e:"09:30",units:3,grade:92},
+{code:"IT302",name:"Database Management",prof:"Dr. Alicia Tan",room:"Room 304",days:["Mon","Wed"],s:"10:00",e:"11:30",units:3,grade:88},
+{code:"IT303",name:"Computer Networks",prof:"Engr. Paolo Rivera",room:"Lab 4",days:["Tue","Thu"],s:"09:00",e:"10:30",units:3,grade:84},
+{code:"ETH101",name:"Ethics in Technology",prof:"Prof. Lourdes Bautista",room:"Room 110",days:["Tue","Thu"],s:"11:00",e:"12:30",units:2,grade:95},
+{code:"MATH201",name:"Probability and Statistics",prof:"Dr. Ramon Villanueva",room:"Room 207",days:["Tue","Thu"],s:"13:00",e:"14:30",units:3,grade:76},
+{code:"IT304",name:"Capstone Project 1",prof:"Dr. Elena Reyes",room:"Room 401",days:["Fri"],s:"14:00",e:"17:00",units:3,grade:90}];
+const anns=[
+{t:"Midterm exam schedule released",c:"Academics",d:"Nov 24",x:"Midterm exams run December 8 to 12. Check your course page for room assignments and bring your school ID.",u:1},
+{t:"Library extends hours during exam week",c:"Campus",d:"Nov 22",x:"The main library will stay open until 11:00 PM from December 1 to 12."},
+{t:"Enrollment for next term opens December 15",c:"Academics",d:"Nov 20",x:"Meet your adviser before December 12 to get your advising clearance."},
+{t:"Tech Fair 2026 call for projects",c:"Events",d:"Nov 18",x:"Submit your project title to the College of Computing office by December 5."},
+{t:"Scholarship renewal deadline",c:"Finance",d:"Nov 15",x:"Upload your grade slip and renewal form to the Scholarship Office before December 1.",u:1}];
+const tasks=[["Database ER diagram","IT302","Nov 27"],["Network lab report","IT303","Nov 29"],["Capstone proposal draft","IT304","Dec 2"]];
+const pts=g=>g>=90?4:g>=85?3.5:g>=80?3:g>=75?2.5:g>=70?2:1;
+const gpa=()=>(courses.reduce((a,c)=>a+pts(c.grade)*c.units,0)/courses.reduce((a,c)=>a+c.units,0)).toFixed(2);
+const fmt=t=>{let[h,m]=t.split(":");return(h%12||12)+":"+m+(h<12?" AM":" PM")};
+const span=c=>fmt(c.s)+" – "+fmt(c.e);
+const ini=student.name.split(" ").map(w=>w[0]).join("");
+const today=D[new Date().getDay()-1];
+const slots=d=>courses.filter(c=>c.days.includes(d)).sort((a,b)=>a.s.localeCompare(b.s));
+const classRow=c=>`<div class="row"><div class="time">${span(c)}</div><div><b>${c.code} · ${c.name}</b><div class="muted">${c.room}, ${c.prof}</div></div></div>`;
+const annCard=a=>`<article class="card ann"><span class="tag ${a.u?'urgent':a.c==='Events'?'event':''}">${a.c}</span> <span class="muted">${a.d}</span><h3>${a.t}</h3><p>${a.x}</p></article>`;
+const views={
+dashboard(){const t=slots(today),first=student.name.split(" ")[0];
+return`<h1>Good day, ${first}</h1><p class="sub">${student.program}, ${student.year} · Section ${student.section}</p>
+<div class="grid"><div class="card stat"><b>${gpa()}</b><span>Current GPA</span></div>
+<div class="card stat"><b>${courses.reduce((a,c)=>a+c.units,0)}</b><span>Units enrolled</span></div>
+<div class="card stat"><b>${tasks.length}</b><span>Assignments due soon</span></div></div>
+<div class="grid"><section class="card"><h2>${t.length?"Today's classes":"No classes today"}</h2>${t.length?t.map(classRow).join(""):'<p class="muted">Your next classes start Monday. Open the schedule to see the full week.</p>'}</section>
+<section class="card"><h2>Due soon</h2>${tasks.map(k=>`<div class="row"><div class="time">${k[2]}</div><div><b>${k[0]}</b><div class="muted">${k[1]}</div></div></div>`).join("")}</section></div>
+<h2>Latest announcements</h2>${anns.slice(0,2).map(annCard).join("")}`},
+schedule(){return`<h1>Class schedule</h1><p class="sub">Select a day to see your classes.</p><div class="tabs" id="tabs">${D.map(d=>`<button data-d="${d}">${d}</button>`).join("")}</div><div id="slots"></div>`},
+grades(){return`<h1>Grades</h1><p class="sub">Midterm standing for the current term. GPA uses a 4.0 scale weighted by units.</p>
+<div class="grid"><div class="card stat"><b>${gpa()}</b><span>Term GPA</span></div><div class="card stat"><b>${Math.round(courses.reduce((a,c)=>a+c.grade,0)/courses.length)}%</b><span>Average grade</span></div></div>
+<div class="card table-wrap"><table><thead><tr><th>Course</th><th>Units</th><th>Grade</th><th>Progress</th><th>Points</th></tr></thead><tbody>${courses.map(c=>`<tr><td><b>${c.code}</b><div class="muted">${c.name}</div></td><td>${c.units}</td><td>${c.grade}%</td><td><div class="bar" role="img" aria-label="${c.grade}%"><i class="${c.grade<80?'low':''}" style="width:${c.grade}%"></i></div></td><td>${pts(c.grade).toFixed(1)}</td></tr>`).join("")}</tbody></table></div>`},
+announcements(){const cats=["All",...new Set(anns.map(a=>a.c))];return`<h1>Announcements</h1><p class="sub">News from your college and the university.</p><div class="tabs" id="tabs">${cats.map(c=>`<button data-c="${c}">${c}</button>`).join("")}</div><div id="list"></div>`},
+profile(){const f=[["Student ID",student.id],["Program",student.program],["Year and section",student.year+", "+student.section],["Adviser",student.adviser],["Email",student.email],["Phone",student.phone],["Address",student.address],["Status",student.status]];
+return`<h1>Student profile</h1><p class="sub">All information shown here is fictional.</p><div class="card"><div class="hero"><span class="avatar">${ini}</span><div><h2 style="margin:0">${student.name}</h2><span class="tag">Enrolled</span></div></div><dl>${f.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join("")}</dl></div>`}};
+const hooks={
+schedule(){const show=d=>{document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.d===d));const s=slots(d);document.getElementById("slots").innerHTML=s.length?s.map(c=>`<div class="slot"><div class="time">${span(c)}</div><div><b>${c.code} · ${c.name}</b><div class="muted">${c.room}, ${c.prof}</div></div></div>`).join(""):'<p class="muted">No classes on this day.</p>'};
+document.getElementById("tabs").onclick=e=>e.target.dataset.d&&show(e.target.dataset.d);show(D.includes(today)?today:"Mon")},
+announcements(){const show=c=>{document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.c===c));document.getElementById("list").innerHTML=anns.filter(a=>c==="All"||a.c===c).map(annCard).join("")};
+document.getElementById("tabs").onclick=e=>e.target.dataset.c&&show(e.target.dataset.c);show("All")}};
+function route(){const k=location.hash.slice(1);const v=views[k]?k:"dashboard";
+document.getElementById("view").innerHTML=views[v]();hooks[v]&&hooks[v]();
+document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.hash==="#"+v));document.title=v[0].toUpperCase()+v.slice(1)+" · Northfield Student Portal";window.scrollTo(0,0)}
+document.getElementById("miniAvatar").textContent=ini;document.getElementById("miniName").textContent=student.name;
+addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
